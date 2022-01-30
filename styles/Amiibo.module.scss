@@ -1,0 +1,22 @@
+.amiicard {
+    list-style-type: none;
+    width: 100%;
+    max-width: 260px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ebebeb;
+    background-color: #f6f6f6;
+    border-radius: 5px;
+    .image {
+        text-align: center;
+        img {
+            cursor: pointer;
+        }
+    }
+    h4 {
+        font-weight: bold;
+    }
+    .price {
+        color: red;
+    }
+}
