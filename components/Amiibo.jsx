@@ -10,7 +10,7 @@ const AmiiboList = ({amiibo}) => {
             <div className={styles.image}>
                 <Link href={amiiboLink}><img height="100" src={amiibo.image} alt="" /></Link>
             </div>
-            <h4>{amiibo.amiiboSeries}</h4>
+            <h5>{amiibo.amiiboSeries}</h5>
             <p className={styles.price}>$ {randomPrice.toLocaleString('es-CL')}</p>
             <Link href={amiiboLink}><a className="papabtn">Ver producto</a></Link>
         </li>

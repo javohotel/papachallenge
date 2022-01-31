@@ -12,7 +12,6 @@ export default function Home() {
     fetch(API)
           .then((response) => response.json())
           .then( (data) => {
-
             const filterAmiibos = data.amiibo.filter((value, index, self) =>
               index === self.findIndex((t) => (
                 t.amiiboSeries === value.amiiboSeries
