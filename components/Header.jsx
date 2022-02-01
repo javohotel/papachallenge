@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Minicart from './Minicart';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Header = () => {
     return (
@@ -14,7 +15,7 @@ const Header = () => {
             </Head>
             <div className='container header-container'>
                <Link href="/">
-                    <a><img width="150" src="https://www.papajohns.cl/static/media/papa-johns-logo.e036da11.svg" alt="" /></a>
+                    <a><Image width="150" height="64" src="https://www.papajohns.cl/static/media/papa-johns-logo.e036da11.svg" /></a>
                 </Link>
                <Minicart></Minicart>
             </div>

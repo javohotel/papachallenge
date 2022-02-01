@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Amiibo = () => {
     const router = useRouter();
@@ -23,7 +24,12 @@ const Amiibo = () => {
         <div className="container">
            <div className='row singleAmiiboRow'>
                     <div className="col-md-6 singleAmiibo-image">
-                        <img src={singleAmiibo.image} alt="" />
+                        <div style={{ position: 'relative', width: '580px', height: '500px' }}>
+                            {Object.keys(singleAmiibo).length != 0 && (
+                                <Image alt="Amiibo" src={singleAmiibo.image} layout="fill" objectFit="contain" />
+                            )}
+                        </div>    
+                        
                     </div>
                     <div className="col-md-6 singleAmiibo-info">
                         <h2>{singleAmiibo.amiiboSeries}</h2>
@@ -57,7 +63,7 @@ const Amiibo = () => {
                 .singleAmiibo-image {
                     background:#f6f6f6;
                     text-align:center;
-                    padding: 20px;
+                    padding: 50px;
                 }
                 .singleAmiibo-image img {
                     max-width:500px;
