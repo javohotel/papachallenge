@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Navbar from './Navbar';
+import Minicart from './Minicart';
 import Link from 'next/link';
 
 const Header = () => {
@@ -16,7 +16,7 @@ const Header = () => {
                <Link href="/">
                     <a><img width="150" src="https://www.papajohns.cl/static/media/papa-johns-logo.e036da11.svg" alt="" /></a>
                 </Link>
-               <Navbar></Navbar>
+               <Minicart></Minicart>
             </div>
         </>
     )
