@@ -8,19 +8,16 @@ Clona este repositorio
 
 `$ git clone https://github.com/javohotel/papachallenge`
 
-Cambiate a culquiera de estas 2 romas:
-
-`git checkout feature/context`
-
-o
-
-`git checkout feature/withredux`
-
-luego
 
 `npm install`
 
 y yerald
+
+Tambien puedes cambiarte a:
+
+`git checkout feature/withredux`
+
+para probar la versión con redux
 
 ## Cómo se usa
 
