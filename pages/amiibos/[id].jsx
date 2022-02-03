@@ -1,12 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import AppContext from '../../context/AppContext';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
+import loading from '../../public/Rolling-1s-200px.gif';
 
 const Amiibo = () => {
     const router = useRouter();
     const [singleAmiibo, setSingleamiibos] = useState({});
     const [tableData, setTabledata] = useState([]);
+    const price = atob(router.query.p);
+    const {addToCart} = useContext(AppContext);
+
+    const handleAddToCart = (amiibo) => () => {
+        addToCart(amiibo)
+    }
 
     const API = 'https://www.amiiboapi.com/api/amiibo/';
 
@@ -25,16 +33,17 @@ const Amiibo = () => {
            <div className='row singleAmiiboRow'>
                     <div className="col-md-6 singleAmiibo-image">
                         <div style={{ position: 'relative', width: '580px', height: '500px' }}>
-                            {Object.keys(singleAmiibo).length != 0 && (
+                            {Object.keys(singleAmiibo).length != 0 ? (
                                 <Image alt="Amiibo" src={singleAmiibo.image} layout="fill" objectFit="contain" />
-                            )}
+                            ) : <Image src={loading} width="150" height="150"/> }
                         </div>    
-                        
                     </div>
                     <div className="col-md-6 singleAmiibo-info">
+                        <p className="volver"> <Link href="/"><a>Volver</a></Link> </p>
                         <h2>{singleAmiibo.amiiboSeries}</h2>
                         <p>Full name: {singleAmiibo.amiiboSeries} </p>
-                        <Link href="/"><a className="papabtn">Agregar al carro</a></Link>
+                        {Object.keys(singleAmiibo).length != 0 && <h4 style={ {color:'red'} }>$ {Number(price).toLocaleString('es-CL')}</h4>}
+                        <button type="button" className="papabtn" onClick={handleAddToCart(singleAmiibo)}>Agregar al carro</button>
                     </div>
                 </div><div className="row">
                         <div className="col-md-12">
@@ -70,9 +79,15 @@ const Amiibo = () => {
                 }
                 .singleAmiibo-info {
                     padding:20px;
+                    position:relative;
                 }
                 .singleAmiiboRow {
                     margin-bottom: 30px;
+                }
+                .volver {
+                    position:absolute;
+                    right:0;
+                    color:#3fae7f;
                 }
             `}</style>
         </div>

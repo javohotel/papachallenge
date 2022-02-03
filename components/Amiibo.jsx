@@ -4,8 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const AmiiboList = ({amiibo}) => {
-    let randomPrice = Math.floor(Math.random() * 100000);
-    let amiiboLink = '/amiibos/' + amiibo.head + amiibo.tail;
+    let randomPrice = Math.floor(Math.random() * 100) * 1000;
+    let priceEncode = btoa(randomPrice);
+    let amiiboLink = '/amiibos/' + amiibo.head + amiibo.tail + '?p=' + priceEncode;
     return(
         <li className={styles.amiicard}>
             <div className={styles.image}>

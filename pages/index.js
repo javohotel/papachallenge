@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import styles from '../styles/Home.module.scss'
 import Amiibo from '../components/Amiibo';
+import loading from '../public/Rolling-1s-200px.gif';
+import Image from 'next/image';
 
 export default function Home() {
-
   const [amiibos, setAmiibos] = useState([]);
 
   const API = 'https://www.amiiboapi.com/api/amiibo/'
@@ -26,13 +27,17 @@ export default function Home() {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Bienvenidos
+          Bienvenidos a PapaApp
         </h1>
-        <ul className={styles.amiibosList}>
-          {amiibos.map((amiibo) => (
-            <Amiibo key={amiibo.head + amiibo.tail} amiibo={amiibo}></Amiibo>
-          ))}
-        </ul>
+        {amiibos.length > 0 ?
+          <ul className={styles.amiibosList}>
+            {amiibos.map((amiibo) => (
+              <Amiibo key={amiibo.head + amiibo.tail} amiibo={amiibo}></Amiibo>
+            ))
+            }
+          </ul>
+          : <p style={{textAlign:'center'}}><Image src={loading} width="150" height="150"/></p> }
+        
       </main>
     </div>
   )
