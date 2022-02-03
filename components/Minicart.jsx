@@ -1,18 +1,12 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import Link from 'next/link';
 import styles from '../styles/Minicart.module.scss';
-import AppContext from "../context/AppContext";
 
 
 const Minicart = () => {
 
-    const {state, removeFromCart} = useContext(AppContext);
-    const {cart} = state;
+    const cart = [];
     const [showMinicart, setShowMinicart] = useState(false);
-
-    const handdleRemove = amiibo => () => {
-        removeFromCart(amiibo);
-    }
 
     const showMinicartAction = () => {
         setShowMinicart(true)

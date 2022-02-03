@@ -1,9 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 import AppContext from "../context/AppContext";
 
 const Checkout = ()=> {
-    const {state} = useContext(AppContext);
-    const {cart} = state;
+
+    const cart = [];
 
     return(
         <div className="container">

@@ -1,5 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react';
-import AppContext from '../../context/AppContext';
+import React, {useState, useEffect} from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,11 +9,7 @@ const Amiibo = () => {
     const [singleAmiibo, setSingleamiibos] = useState({});
     const [tableData, setTabledata] = useState([]);
     const price = atob(router.query.p);
-    const {addToCart} = useContext(AppContext);
 
-    const handleAddToCart = (amiibo) => () => {
-        addToCart(amiibo)
-    }
 
     const API = 'https://www.amiiboapi.com/api/amiibo/';
 
@@ -43,7 +38,7 @@ const Amiibo = () => {
                         <h2>{singleAmiibo.amiiboSeries}</h2>
                         <p>Full name: {singleAmiibo.amiiboSeries} </p>
                         {Object.keys(singleAmiibo).length != 0 && <h4 style={ {color:'red'} }>$ {Number(price).toLocaleString('es-CL')}</h4>}
-                        <button type="button" className="papabtn" onClick={handleAddToCart(singleAmiibo)}>Agregar al carro</button>
+                        <button type="button" className="papabtn">Agregar al carro</button>
                     </div>
                 </div><div className="row">
                         <div className="col-md-12">
