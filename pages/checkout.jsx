@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
+import AppContext from "../context/AppContext";
 
 const Checkout = ()=> {
+    const {state} = useContext(AppContext);
+    const {cart} = state;
+
     return(
         <div className="container">
             <h1>Checkout</h1>
+            {cart.length > 0 ? 
             <div className="row">
                 <div className="col-md-7">
                     <h4>Información personal</h4>
@@ -40,12 +45,28 @@ const Checkout = ()=> {
                         <a href="/" className="papabtn">Pagar</a>
                     </div>
                 </div>
-                <div className="col-md-5">
+                <div className="col-md-5 cart-resume">
                     <h5>Resumen</h5>
                     <p>Este es el resumen de tu pedido:</p>
+                    <ul>
+                        {cart.map((item) => (
+                            <li className="list-group-item d-flex justify-content-between align-items-start">    
+                                <div className="ms-2 me-auto">
+                                <div className="fw-bold">{item.amiiboSeries}</div>
+                                {item.character}
+                                </div>
+                            
+                        </li>
+                        ))}
+                    </ul>
                 </div>
             </div>
+            : <div class="alert alert-warning" role="alert">
+                    No tienes productos para pagar
+                </div> 
+            }
         </div>
+        
     )
 }
 

@@ -30,12 +30,13 @@
     width: 450px;
     min-height: 100vh;
     transition: all ease .5s;
+    z-index: 9;
     @media screen and (max-width:768px) {
         width: 100%;
     }
     .header {
         background-color: #3fae7f;
-        padding: 10px;
+        padding: 10px 30px;
         position: relative;
         color: #fff;
         .close {
@@ -46,10 +47,10 @@
         }
     }
     .productList {
-        padding: 10px;
+        padding: 30px;
     }
     .miniCartFooter {
-        padding: 10px;
+        padding: 30px;
     }
 
 }

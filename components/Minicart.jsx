@@ -1,15 +1,22 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Link from 'next/link';
-import styles from '../styles/Minicart.module.scss'
+import styles from '../styles/Minicart.module.scss';
+import AppContext from "../context/AppContext";
+
 
 const Minicart = () => {
 
+    const {state, removeFromCart} = useContext(AppContext);
+    const {cart} = state;
     const [showMinicart, setShowMinicart] = useState(false);
+
+    const handdleRemove = amiibo => () => {
+        removeFromCart(amiibo);
+    }
 
     const showMinicartAction = () => {
         setShowMinicart(true)
     }
-
     const hideMinicartAction = () => {
         setShowMinicart(false)
     }
@@ -20,7 +27,7 @@ const Minicart = () => {
                 <ul>
                     <li onClick={showMinicartAction}>
                         <i className="bi bi-cart3"></i>
-                        <span className={styles.count}>1</span>
+                        {cart.length > 0 && <span className={styles.count}>{cart.length}</span>}
                     </li>
                     
                 </ul>
@@ -32,7 +39,23 @@ const Minicart = () => {
                 </div>
                 
                 <div className={styles.productList}>
-                    Muchos productos
+                {cart.length > 0 ?
+    
+                    <ul className="list-group list-group-numbered">
+                        {cart.map((item) => (
+                            <li className="list-group-item d-flex justify-content-between align-items-start">
+                                <div className="ms-2 me-auto">
+                                <div className="fw-bold">{item.amiiboSeries}</div>
+                                {item.character}
+                                </div>
+                                <span style={{cursor: 'pointer'}} onClick={handdleRemove(item)} className="badge bg-danger rounded-pill"><i className="bi bi-trash" /></span>
+                          </li>
+                           
+                        ))}
+                  </ul>
+
+                : <p>No tienes productos en tu carrito</p>
+                }
                 </div>
 
                 <footer className={styles.miniCartFooter}>
