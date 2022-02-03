@@ -3,8 +3,10 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import loading from '../../public/Rolling-1s-200px.gif';
+import { connect } from "react-redux";
+import { addProductToCart } from "../../actions/cart";
 
-const Amiibo = () => {
+const Amiibo = (props) => {
     const router = useRouter();
     const [singleAmiibo, setSingleamiibos] = useState({});
     const [tableData, setTabledata] = useState([]);
@@ -38,7 +40,7 @@ const Amiibo = () => {
                         <h2>{singleAmiibo.amiiboSeries}</h2>
                         <p>Full name: {singleAmiibo.amiiboSeries} </p>
                         {Object.keys(singleAmiibo).length != 0 && <h4 style={ {color:'red'} }>$ {Number(price).toLocaleString('es-CL')}</h4>}
-                        <button type="button" className="papabtn">Agregar al carro</button>
+                        <button type="button" onClick={() => props.addProduct(singleAmiibo)} className="papabtn">Agregar al carro</button>
                     </div>
                 </div><div className="row">
                         <div className="col-md-12">
@@ -89,4 +91,20 @@ const Amiibo = () => {
     )
 }
 
-export default Amiibo;
+const mapStateToProps = state => {
+    return {
+      cart: state.cart
+    };
+  };
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      addProduct: (amiibo) => dispatch(addProductToCart(amiibo))
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Amiibo);
+  

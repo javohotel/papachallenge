@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import styles from '../styles/Minicart.module.scss';
+import { connect } from "react-redux";
+import { removeProductFromCart } from "../actions/cart";
 
 
-const Minicart = () => {
+const Minicart = (props) => {
 
-    const cart = [];
+    const {cart} = props;
     const [showMinicart, setShowMinicart] = useState(false);
 
     const showMinicartAction = () => {
@@ -37,12 +39,12 @@ const Minicart = () => {
     
                     <ul className="list-group list-group-numbered">
                         {cart.map((item) => (
-                            <li className="list-group-item d-flex justify-content-between align-items-start">
+                            <li key={item.tail} className="list-group-item d-flex justify-content-between align-items-start">
                                 <div className="ms-2 me-auto">
                                 <div className="fw-bold">{item.amiiboSeries}</div>
                                 {item.character}
                                 </div>
-                                <span style={{cursor: 'pointer'}} onClick={handdleRemove(item)} className="badge bg-danger rounded-pill"><i className="bi bi-trash" /></span>
+                                <span style={{cursor: 'pointer'}} onClick={() => props.removeProduct(item)} className="badge bg-danger rounded-pill"><i className="bi bi-trash" /></span>
                           </li>
                            
                         ))}
@@ -60,4 +62,20 @@ const Minicart = () => {
     )
 }
 
-export default Minicart;
+const mapStateToProps = state => {
+    return {
+      cart: state.cart
+    };
+  };
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      removeProduct: amiibo => dispatch(removeProductFromCart(amiibo))
+    };
+  };
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Minicart);
+  
