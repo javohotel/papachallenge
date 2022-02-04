@@ -3,10 +3,7 @@ import '../styles/globals.scss';
 import Layout from '../components/Layout';
 import { Provider } from 'react-redux';
 import configureStore from '../store/configureStore';
-
-const initialState = {
-  cart: []
-};
+import initialState from '../initialState';
 
 const store = configureStore(initialState);
 

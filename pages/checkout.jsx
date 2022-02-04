@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 
 const Checkout = (props)=> {
 
-    const cart = [];
-    console.log(props);
+    const {cart} = props;
+    console.log(cart);
 
     return(
         <div className="container">
@@ -71,5 +71,15 @@ const Checkout = (props)=> {
     )
 }
 
-export default connect()(Checkout);
+const mapStateToProps = state => {
+    return {
+      cart: state.cart
+    };
+  };
+  
+  
+  export default connect(
+    mapStateToProps,
+  )(Checkout);
+  
   
