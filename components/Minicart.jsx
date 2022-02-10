@@ -21,6 +21,12 @@ const Minicart = () => {
         setShowMinicart(false)
     }
 
+    const sumaTotal = () => {
+        const reducer = (acumulator, currentValue) => Number(acumulator) + Number(currentValue.price);
+        const sum = cart.reduce(reducer, 0);
+        return sum.toLocaleString('es-CL');
+    }
+
     return (
         <>
             <nav className={styles.headerNav}>
@@ -40,19 +46,22 @@ const Minicart = () => {
                 
                 <div className={styles.productList}>
                 {cart.length > 0 ?
-    
+                    <>                    
                     <ul className="list-group list-group-numbered">
-                        {cart.map((item) => (
-                            <li className="list-group-item d-flex justify-content-between align-items-start">
+                        {cart.map((item, index) => (
+                            <li className="list-group-item d-flex justify-content-between align-items-start" key={item.tail + index}>
                                 <div className="ms-2 me-auto">
                                 <div className="fw-bold">{item.amiiboSeries}</div>
-                                {item.character}
+                                $ {Number(item.price).toLocaleString('es-CL')}
                                 </div>
                                 <span style={{cursor: 'pointer'}} onClick={handdleRemove(item)} className="badge bg-danger rounded-pill"><i className="bi bi-trash" /></span>
                           </li>
                            
                         ))}
-                  </ul>
+                    </ul>
+                    <h5 className={styles.totales}>Total: ${sumaTotal()}</h5>
+                  </>
+
 
                 : <p>No tienes productos en tu carrito</p>
                 }

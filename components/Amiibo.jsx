@@ -1,12 +1,22 @@
-import React from "react";
+import React, {useContext} from "react";
+import AppContext from '../context/AppContext';
 import styles from '../styles/Amiibo.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 
+
 const AmiiboList = ({amiibo}) => {
-    let randomPrice = Math.floor(Math.random() * 100) * 1000;
+    let randomPrice = Math.floor(Math.random() * 10000) * 10;
     let priceEncode = btoa(randomPrice);
     let amiiboLink = '/amiibos/' + amiibo.head + amiibo.tail + '?p=' + priceEncode;
+
+    const {addToCart} = useContext(AppContext);
+
+    const handleAddToCart = (amiibo, price) => () => {
+        addToCart(amiibo, price)
+    }
+
+
     return(
         <li className={styles.amiicard}>
             <div className={styles.image}>
@@ -19,7 +29,8 @@ const AmiiboList = ({amiibo}) => {
             </div>
             <h5>{amiibo.amiiboSeries}</h5>
             <p className={styles.price}>$ {randomPrice.toLocaleString('es-CL')}</p>
-            <Link href={amiiboLink}><a className="papabtn">Ver producto</a></Link>
+            <button type="button" className="papabtn" onClick={handleAddToCart(amiibo, randomPrice)}>Agregar al carro</button>
+            <p className={styles.ver}><Link href={amiiboLink}><a>Ver producto</a></Link></p>
         </li>
     )
 }
