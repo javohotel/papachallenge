@@ -7,9 +7,17 @@ PapaChallenge es la nueva forma de comprar pizzas a traves de amiibos en interne
 Clona este repositorio
 
 `$ git clone https://github.com/javohotel/papachallenge`
+
+
 `npm install`
 
 y yerald
+
+Tambien puedes cambiarte a:
+
+`git checkout feature/withredux`
+
+para probar la versión con redux
 
 ## Cómo se usa
 
