@@ -7,21 +7,31 @@ import Image from 'next/image';
 export default function Home() {
   const [amiibos, setAmiibos] = useState([]);
 
-  const API = 'https://www.amiiboapi.com/api/amiibo/'
+  const API = 'https://www.amiiboapi.com/api/amiibo/';
 
-  useEffect( () => {
-    fetch(API)
-          .then((response) => response.json())
-          .then( (data) => {
-            const filterAmiibos = data.amiibo.filter((value, index, self) =>
-              index === self.findIndex((t) => (
-                t.amiiboSeries === value.amiiboSeries
-              ))
-            )
-            setAmiibos(filterAmiibos);
-          })
-  }, [] )
+  const ISSERVER = typeof window === "undefined";
 
+  if(!ISSERVER) {
+    const cache = sessionStorage.getItem('amiibos');
+    
+    useEffect( ()=>{
+      if(cache) {
+        setAmiibos(JSON.parse(cache));
+      } else {
+        fetch(API)
+            .then((response) => response.json())
+            .then( (data) => {
+              const filterAmiibos = data.amiibo.filter((value, index, self) =>
+                index === self.findIndex((t) => (
+                  t.amiiboSeries === value.amiiboSeries
+                ))
+              )
+              setAmiibos(filterAmiibos);
+              sessionStorage.setItem('amiibos',JSON.stringify(filterAmiibos));
+            })
+      }
+    }, []) 
+  }
 
   return (
     <div className={styles.container}>
